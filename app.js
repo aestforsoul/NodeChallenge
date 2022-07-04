@@ -5,6 +5,12 @@ const port = 3000;
 
 const htmlPath = prompt("Please, enter path to HTML file:  ");
 const dataPath = prompt("Please, enter path to data file:  ");
+if (fs.existsSync(htmlPath) && fs.existsSync(dataPath)) {
+  console.log("\nFiles exist:", htmlPath, dataPath);
+} else {
+  console.log("\nPlease, provide valid files");
+  return;
+}
 
 const mergeValues = (values, content) => {
   for (let key in values) {
@@ -14,17 +20,9 @@ const mergeValues = (values, content) => {
 };
 
 const view = (templateName, values, res) => {
-  try {
-    let fileContent = fs.readFileSync(templateName, "utf8");
-    fileContent = mergeValues(values, fileContent);
-    res.write(fileContent);
-  } catch (error) {
-    if (error.code === "ENOENT") {
-      console.log("\nOops, file with HTML template not found!");
-    } else {
-      throw error;
-    }
-  }
+  let fileContent = fs.readFileSync(templateName, "utf8");
+  fileContent = mergeValues(values, fileContent);
+  res.write(fileContent);
 };
 
 const server = http.createServer((request, response) => {
@@ -35,7 +33,7 @@ const server = http.createServer((request, response) => {
   fs.readFile(dataPath, "utf8", (error, data) => {
     if (error) {
       response.writeHead(404);
-      response.write("Oops, file with data not found!");
+      response.write(error);
     } else {
       const jsonData = JSON.parse(data);
       view(htmlPath, jsonData, response);
