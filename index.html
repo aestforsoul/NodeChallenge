@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node js</title>
+    <style>
+      .card {
+        font-family: "Source Code Pro", monospace;
+        color: #f2f2f2;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .info {
+        width: 300px;
+        padding: 20px;
+        background-color: #1a1a1a;
+        border-radius: 10px;
+      }
+      .photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .title {
+        text-align: center;
+        font-size: 28px;
+        margin: 10px 0 0 0;
+      }
+      .info-list {
+        list-style: none;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+      }
+      .list-item {
+        margin: 10px 0 0 0;
+        text-align: center;
+      }
+      .data {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body class="card">
+    <div class="container">
+      <div class="info">
+        <img src="{{imgUrl}}" alt="Photo" class="photo" />
+        <h2 class="title">{{title}}</h2>
+        <ul class="info-list">
+          <li class="list-item">
+            Format: <span class="data">{{format}}</span>
+          </li>
+          <li class="list-item">
+            Episode count: <span class="data">{{episodes}}</span>
+          </li>
+          <li class="list-item">
+            No. of seasons: <span class="data">{{seasons}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
