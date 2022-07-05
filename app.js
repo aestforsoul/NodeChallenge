@@ -25,20 +25,20 @@ const view = (templateName, values, res) => {
   res.write(fileContent);
 };
 
-const server = http.createServer((request, response) => {
-  response.writeHead(200, {
+const server = http.createServer((req, res) => {
+  res.writeHead(200, {
     "Content-Type": "text/html",
   });
 
-  fs.readFile(dataPath, "utf8", (error, data) => {
-    if (error) {
-      response.writeHead(404);
-      response.write(error);
+  fs.readFile(dataPath, "utf8", (err, data) => {
+    if (err) {
+      res.writeHead(404);
+      res.write(err);
     } else {
       const jsonData = JSON.parse(data);
-      view(htmlPath, jsonData, response);
+      view(htmlPath, jsonData, res);
     }
-    response.end();
+    res.end();
   });
 });
 
